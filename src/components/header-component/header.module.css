@@ -1,0 +1,37 @@
+.wrapper {
+  padding-right: 5rem;
+  padding-left: 5rem;
+  padding-top: 3rem;
+  height: 12rem;
+  flex: 0 0 100%;
+}
+
+.header_content {
+  padding: 1rem;
+  height: 8rem;
+  width: 100%;
+  border-bottom: 0.75rem solid #ffffff;
+  border-top: 0.75rem solid #ffffff;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header_site_title {
+  border-radius: 3rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background: #101010;
+  font-size: 2.8rem;
+  top: -50%;
+  left: 50%;
+  transform: translate(-50%, -0.3rem);
+  position: absolute;
+}
+
+.header_site_name {
+  font-size: 3.5rem;
+}
+
+/*# sourceMappingURL=header.module.css.map */

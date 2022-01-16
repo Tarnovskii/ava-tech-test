@@ -1,0 +1,118 @@
+$color-bg: #101010;
+$start-color: #fff;
+$spacing: 2048px;
+$time-1: 300s;
+$time-2: 250s;
+$time-3: 200s;
+$time-4: 150s;
+
+@function particles($max) {
+  $val: 0px 0px $start-color;
+  @for $i from 1 through $max {
+    $val: #{$val}, random($spacing)+px random($spacing)+px $start-color;
+  }
+  @return $val;
+}
+
+@mixin particles($max) {
+  box-shadow: particles($max);
+  border-radius: 50%;
+}
+
+.wrapper {
+  z-index: -1;
+  perspective: $spacing;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $color-bg;
+}
+
+.star, .star:after {
+  background: transparent;
+}
+
+.star:after {
+  position: absolute;
+  content: "";
+  top: $spacing;
+}
+
+.star1 {
+  animation: animStars $time-1 linear infinite, apearStars $time-1 linear infinite;
+  @include particles(1000);
+  height: 1px;
+  width: 1px;
+}
+
+.star1:after {
+  @include particles(900);
+  height: 1px;
+  width: 1px;
+}
+
+.star2 {
+  animation: animStars $time-2 linear infinite, apearStars $time-2 linear infinite;
+  @include particles(800);
+  height: 1px;
+  width: 1px;
+}
+
+.star2:after {
+  @include particles(500);
+  height: 1px;
+  width: 1px;
+}
+
+.star3 {
+  animation: animStars $time-3 linear infinite, apearStars $time-3 linear infinite;
+  @include particles(800);
+  height: 1px;
+  width: 1px;
+}
+
+.star3:after {
+  @include particles(1100);
+  height: 1px;
+  width: 1px;
+  border-radius: 50%;
+}
+
+.star4 {
+  animation: animStars $time-4 linear infinite, apearStars $time-4 linear infinite;
+  @include particles(1200);
+  height: 1px;
+  width: 1px;
+}
+
+.star4:after {
+  @include particles(700);
+  height: 1px;
+  width: 1px;
+}
+
+@keyframes appearStarts {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes animStars {
+  from {
+    transform: translateZ(0px);
+  }
+  to {
+    transform: translateZ($spacing * 1);
+  }
+}
