@@ -1,3 +1,7 @@
-
+.wrapper {
+  flex: 0 0 15rem;
+  height: 15rem;
+  background: green;
+}
 
 /*# sourceMappingURL=character-tile.module.css.map */

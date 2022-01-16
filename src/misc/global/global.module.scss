@@ -1,5 +1,10 @@
 .additional_windows {
   flex: 0 0 20%;
   background: green;
+  overflow: hidden;
+  transition: .3s all;
 }
 
+.closed_window {
+  flex: 0 0 0 !important;
+}

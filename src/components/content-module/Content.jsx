@@ -10,7 +10,7 @@ const Content = props => {
         <main className={s.wrapper}>
             <Favorites/>
             <section className={s.content_wrapper}>
-                {new Array(20).fill('').map(i => <CharacterTile/>)}
+                {new Array(20).fill('').map(i => <CharacterTile asd={true}/>)}
             </section>
             <Filtering/>
         </main>

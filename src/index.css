@@ -4,6 +4,7 @@
 }
 
 * {
+    color: white;
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -29,7 +30,6 @@ code {
 }
 
 #root {
-    color: white;
     min-height: inherit;
     background-size: cover;
 }

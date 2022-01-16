@@ -16,6 +16,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  button {
+    font-size: 2rem;
+    font-weight: bold;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 1rem 2rem;
+    cursor: pointer;
+  }
 }
 
 .header_site_title {

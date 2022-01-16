@@ -1,6 +1,12 @@
 .additional_windows {
   flex: 0 0 20%;
   background: green;
+  overflow: hidden;
+  transition: 0.3s all;
+}
+
+.closed_window {
+  flex: 0 0 0 !important;
 }
 
 /*# sourceMappingURL=favorites.module.css.map */
