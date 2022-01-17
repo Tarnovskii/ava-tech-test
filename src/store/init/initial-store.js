@@ -3,8 +3,15 @@ export const initialStore = {
         content: [],
         isOpen: false,
     },
-   filtersState: {
-        content: [],
+    filtersState: {
+        filteringOptions: null,
+        searchByNameField: '',
+        filterEntities: {},
+        isFetching: false,
         isOpen: false,
+    },
+    charactersState: {
+        charactersList: [],
+        isFetching: false
     }
 }

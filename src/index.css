@@ -6,8 +6,23 @@
 * {
     color: white;
     box-sizing: border-box;
+    font-family: StarJedi, 'sans-serif';
     padding: 0;
     margin: 0;
+}
+
+*::-webkit-scrollbar {
+    width: 1rem;
+    background: #101010;
+}
+
+*::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #525252;
+    outline: 1px solid #2a2a2a;
 }
 
 html {
@@ -19,7 +34,6 @@ html {
 body {
     width: 100%;
     min-height: inherit;
-    font-family: StarJedi, 'sans-serif';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

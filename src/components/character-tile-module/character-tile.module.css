@@ -1,7 +1,38 @@
 .wrapper {
-  flex: 0 0 15rem;
-  height: 15rem;
-  background: green;
+  background: #101010;
+  border: 1px solid #424242;
+}
+.wrapper:hover {
+  background: #0e0e0e;
+  border: 1px solid #2d2d2d;
+}
+
+.general_info {
+  font-size: 1.3rem;
+  padding: 0.3rem 1rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.details_wrapper {
+  height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  white-space: nowrap;
+  column-gap: 1rem;
+  row-gap: 1rem;
+}
+
+.open {
+  padding: 0.5rem 2rem 0.5rem;
+  height: auto;
+}
+.open p {
+  flex: 0 1 50%;
 }
 
 /*# sourceMappingURL=character-tile.module.css.map */

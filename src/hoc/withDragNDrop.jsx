@@ -2,8 +2,7 @@ import React, {Component} from 'react'
 
 export const withDragNDrop = (wrapperElementClassName, wrapperElementType) => {
     const onDragStartHandler = (event, entity) => {
-        console.log(entity)
-        console.log(event)
+
     }
 
     const onDragEndHandler = (event, entity) => {
@@ -18,8 +17,6 @@ export const withDragNDrop = (wrapperElementClassName, wrapperElementType) => {
 
     const onDropHandler = (event, entity) => {
         event.preventDefault()
-        console.log(entity)
-        console.log(event)
     }
 
     const DraggableWrapper = (children) => React.createElement(

@@ -1,0 +1,69 @@
+.wrapper {
+  padding-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  width: 100%;
+}
+
+.tile_header {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 1.4rem;
+  column-gap: 1rem;
+}
+.tile_header img {
+  height: 1em;
+  filter: invert(1);
+}
+.tile_header, .tile_header:after, .tile_header img {
+  transition: 0.3s all;
+}
+.tile_header:after {
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  content: "";
+  height: 4px;
+  width: 0;
+  background: white;
+}
+.tile_header:hover:after {
+  width: 100%;
+}
+
+img.open {
+  transform: rotate(90deg);
+}
+
+div.open {
+  height: auto;
+}
+
+.group_options_wrapper {
+  height: 0;
+  overflow: hidden;
+}
+
+.group_option {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  column-gap: 1rem;
+  cursor: pointer;
+}
+.group_option span {
+  width: 1em;
+  height: 1em;
+  background: white;
+}
+
+.check_box_active {
+  border: 0.3em solid #ffffff;
+  background: #101010 !important;
+}
+
+/*# sourceMappingURL=filter-tile.module.css.map */

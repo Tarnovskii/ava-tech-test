@@ -4,10 +4,12 @@ import thunk from "redux-thunk";
 
 import favoritesState from '../reducers/favorites-window-reducer'
 import filtersState from '../reducers/filters-window-reducer'
+import charactersState from '../reducers/characters-reducer'
 
 const reducers = combineReducers({
     favoritesState,
-    filtersState
+    filtersState,
+    charactersState
 });
 
 const composeSetup = process.env.NODE_ENV !== 'production' && typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?

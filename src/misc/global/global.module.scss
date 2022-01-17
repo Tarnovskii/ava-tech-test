@@ -1,8 +1,11 @@
 .additional_windows {
   flex: 0 0 20%;
-  background: green;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   transition: .3s all;
+  position: sticky;
+  top: 12rem;
+  height: calc(100vh - 12rem);
 }
 
 .closed_window {
