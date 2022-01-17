@@ -1,7 +1,7 @@
 export const initialStore = {
     favoritesState: {
-        content: [],
         isOpen: false,
+        totalFavoritesCharacters: 0,
     },
     filtersState: {
         filteringOptions: null,

@@ -10,22 +10,20 @@ import {fetchAllCharacters} from "../../store/actions/characters-actions";
 import loader from '../../img/logo.png'
 import {updateSearchInput} from "../../store/actions/filters-window-actions";
 import {
+    getAllCharactersByName,
     getAllCharactersUsedByFilters,
     getAllOptionsUsedAsFilter,
 } from "../../utils/filters-utils";
-import {useFilter} from "../../hooks/useFilter";
+import {setTotalFavoritesEntity} from "../../store/actions/favorites-window-actions";
 
 const Content = props => {
     const dispatch = useDispatch()
     const isDataFetching = useSelector(store => store.charactersState.isFetching)
     const searchByNameField = useSelector(store => store.filtersState.searchByNameField)
+    const charactersList = useSelector(store => store.charactersState.charactersList)
+    const filtersList = useSelector(store => store.filtersState.filterEntities)
 
-    const usedFilters = useFilter(store => store.filtersState.filterEntities, getAllOptionsUsedAsFilter, [])
-    const charactersList = useFilter(
-        store => store.charactersState.charactersList,
-        (charactersList) => getAllCharactersUsedByFilters(charactersList, usedFilters),
-        []
-    )
+    const [displayingCharactersList, setDisplayingCharactersList] = useState([])
 
     const charactersListMapper = (data) => {
         return <CharacterTile {...data}/>
@@ -36,18 +34,18 @@ const Content = props => {
     }
 
     useEffect(() => {
+        const usedOptionsAsFilters = getAllOptionsUsedAsFilter(filtersList)
+
+        const charactersListByFilters = getAllCharactersUsedByFilters(charactersList, usedOptionsAsFilters)
+
+        setDisplayingCharactersList(getAllCharactersByName(charactersListByFilters, searchByNameField))
+
+    }, [charactersList, filtersList, searchByNameField])
+
+    useEffect(() => {
         dispatch(fetchAllCharacters())
+        dispatch(setTotalFavoritesEntity())
     }, [])
-
-    useEffect(() => {
-        console.log("===========================FILTERS")
-        console.log(usedFilters)
-    }, [usedFilters])
-
-    useEffect(() => {
-        console.log('===========================LIST')
-        console.log(charactersList)
-    }, [charactersList])
 
     return (
         <main className={s.wrapper}>
@@ -59,7 +57,7 @@ const Content = props => {
                             <input placeholder={'SEARCH BY CHARACTER NAME'} value={searchByNameField}
                                    onChange={updateSearchNameInput}/>
                         </div>
-                        {charactersList?.map(charactersListMapper)}
+                        {displayingCharactersList.map(charactersListMapper)}
                     </>
                 )}
             </section>

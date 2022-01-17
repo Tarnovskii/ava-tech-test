@@ -24,6 +24,7 @@ export const getAllOptionsFromGroupUsedAsFilter = (optionsGroup) => {
 }
 
 export const getAllOptionsUsedAsFilter = (optionsGroups) => {
+
     if (!Object.keys(optionsGroups).length) return []
 
     return Object.keys(optionsGroups).map(groupName => {
@@ -36,18 +37,18 @@ export const getAllOptionsUsedAsFilter = (optionsGroups) => {
 export const getAllCharactersUsedByFilters = (charactersList, optionsUsedAsFilter = []) => {
     let resultArray = charactersList
 
-    if (!optionsUsedAsFilter.length) return charactersList
-
-    return optionsUsedAsFilter.forEach(currentFilterGroup => {
-        resultArray = getAllCharactersByUsedGroupFilters(resultArray, currentFilterGroup)
+    optionsUsedAsFilter.forEach(group => {
+        resultArray = getAllCharactersByUsedGroupFilters(resultArray, group)
     })
+
+    return resultArray
 }
 
 export const getAllCharactersByUsedGroupFilters = (charactersList, optionGroup) => {
 
-    const [group, options] = Object.entries(optionGroup)
+    const [[group, options]] = Object.entries(optionGroup)
 
-    if (options.length) return charactersList
+    if (!options.length) return charactersList
 
     const _group = (group === 'planets') ? 'homeworld' : group
 
@@ -56,8 +57,17 @@ export const getAllCharactersByUsedGroupFilters = (charactersList, optionGroup) 
             case 'string':
                 return options.includes(character[`${_group}`])
             default:
-                return character[`${_group}`].filter(url => options.includes(url))
+                let suitableFilters = []
+                character[`${_group}`].forEach(groupEntity => {
+                    if (options.indexOf(groupEntity) === -1) return;
+                    suitableFilters = [...suitableFilters, groupEntity]
+                })
+                return suitableFilters.length === options.length
         }
     })
+}
 
+export const getAllCharactersByName = (charactersList, searchedName) => {
+    if (searchedName === '') return charactersList
+    return charactersList.filter(({name}) => name.toLowerCase().includes(searchedName.toLowerCase()))
 }

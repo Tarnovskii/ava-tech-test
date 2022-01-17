@@ -1,11 +1,10 @@
 import React, {Fragment, useEffect, useState} from 'react'
-import {withDragNDrop} from "../../hoc/withDragNDrop";
 
 import s from './character-tile.module.css'
 import {StarWarsEntityApi} from "../../api/StarWarsEntityApi";
 
 const CharacterTile = props => {
-    const {name, birth_year} = props
+    const {name, birth_year, url} = props
     const [isDetailsOpen, setIsDetailsOpenStatus] = useState(false)
     const [details, setDetails] = useState((({species, movies, spaceships}) => ({species, movies, spaceships}))(props))
     const [isDetailsLoading, setIsDetailsLoadingStatus] = useState(false)
@@ -18,6 +17,13 @@ const CharacterTile = props => {
 
         return await Promise.all(fetchPromises)
     }
+
+    const onDragStartHandler = (event) => {
+        event.dataTransfer.setData('name', name)
+        event.dataTransfer.setData('birth_year', birth_year)
+        event.dataTransfer.setData('url', url)
+    }
+
 
     useEffect(() => {
         if (isDetailsOpen) {
@@ -34,7 +40,7 @@ const CharacterTile = props => {
     }, [isDetailsOpen])
 
     return (
-        <Fragment>
+        <div draggable={true} onDragStart={onDragStartHandler} className={s.wrapper} >
             <div onClick={setIsDetailsOpenStatus.bind(null, !isDetailsOpen)} className={s.general_info}>
                 <p>{name}</p>
                 <p>D0B: {birth_year}</p>
@@ -42,8 +48,8 @@ const CharacterTile = props => {
             <div className={`${isDetailsOpen && s.open} ${s.details_wrapper}`}>
                 {Object.keys(details).map(key => <p>{key} : {details[key] || 'unknown'}</p>)}
             </div>
-        </Fragment>
+        </div>
     )
 }
 
-export default withDragNDrop(s.wrapper, 'div')(CharacterTile)
+export default CharacterTile

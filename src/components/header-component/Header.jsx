@@ -1,12 +1,14 @@
 import React from 'react'
 
 import s from './header.module.css'
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {toggleFiltersWindowOpenState} from "../../store/actions/filters-window-actions";
 import {toggleFavoritesWindowOpenStatus} from "../../store/actions/favorites-window-actions";
 
 const Header = props => {
     const dispatch = useDispatch()
+
+    const totalFavoritesCharacters = useSelector(store => store.favoritesState.totalFavoritesCharacters)
 
     const filtersButtonHandler = () => {
         dispatch(toggleFiltersWindowOpenState())
@@ -20,7 +22,7 @@ const Header = props => {
         <header className={s.wrapper}>
             <div className={s.header_content}>
                 <b className={s.header_site_title}>STAR WARS</b>
-                <button onClick={favoritesButtonHandler}>Favorites</button>
+                <button onClick={favoritesButtonHandler}>Favorites {!!totalFavoritesCharacters && totalFavoritesCharacters}</button>
                 <b className={s.header_site_name}>Character Gallery</b>
                 <button onClick={filtersButtonHandler}>Filters</button>
             </div>

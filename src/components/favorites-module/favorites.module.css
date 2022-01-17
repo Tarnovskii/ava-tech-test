@@ -12,4 +12,20 @@
   flex: 0 0 0 !important;
 }
 
+.favorite_wrapper {
+  padding: 0.5rem 1rem;
+  width: 100%;
+}
+.favorite_wrapper span {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: 0;
+  cursor: pointer;
+}
+
+.favorite_info {
+  display: flex;
+  justify-content: space-between;
+}
+
 /*# sourceMappingURL=favorites.module.css.map */

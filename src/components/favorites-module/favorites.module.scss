@@ -1,1 +1,18 @@
 @import '../../misc/global/global.module';
+
+.favorite_wrapper {
+  padding: 0.5rem 1rem;
+  width: 100%;
+
+  span {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: 0;
+    cursor: pointer;
+  }
+}
+
+.favorite_info {
+  display: flex;
+  justify-content: space-between;
+}
