@@ -12,4 +12,18 @@
   flex: 0 0 0 !important;
 }
 
+.range_input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+.range_input p {
+  font-size: 1.2rem;
+}
+.range_input input {
+  width: 100%;
+}
+
 /*# sourceMappingURL=filtering.module.css.map */

@@ -35,3 +35,7 @@ export const updateFilterUsage = (groupName, optionName) => {
 export const updateSearchInput = (searchValue) => {
     return {type: '[FILTERS] UPDATE_SEARCH_INPUT_VALUE', value:searchValue}
 }
+
+export const updateBirthDateRange = (border, value) => {
+    return {type: '[FILTERS] UPDATE_BIRTH_DATE_RANGES', value: {border, value}}
+}

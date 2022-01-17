@@ -7,6 +7,11 @@ export const initialStore = {
         filteringOptions: null,
         searchByNameField: '',
         filterEntities: {},
+        birthRanges: {
+            bby: 999,
+            aby: 999
+        },
+        charactersList: [],
         isFetching: false,
         isOpen: false,
     },

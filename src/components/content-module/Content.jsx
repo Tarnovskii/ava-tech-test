@@ -4,12 +4,13 @@ import s from './content.module.css'
 import Favorites from "../favorites-module/Favorites";
 import Filtering from "../filtering-module/Filtering";
 import CharacterTile from "../character-tile-module/CharacterTile";
-import {useDispatch, useSelector} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 import {fetchAllCharacters} from "../../store/actions/characters-actions";
 
 import loader from '../../img/logo.png'
 import {updateSearchInput} from "../../store/actions/filters-window-actions";
 import {
+    getAllCharactersByBirthDate,
     getAllCharactersByName,
     getAllCharactersUsedByFilters,
     getAllOptionsUsedAsFilter,
@@ -18,10 +19,6 @@ import {setTotalFavoritesEntity} from "../../store/actions/favorites-window-acti
 
 const Content = props => {
     const dispatch = useDispatch()
-    const isDataFetching = useSelector(store => store.charactersState.isFetching)
-    const searchByNameField = useSelector(store => store.filtersState.searchByNameField)
-    const charactersList = useSelector(store => store.charactersState.charactersList)
-    const filtersList = useSelector(store => store.filtersState.filterEntities)
 
     const [displayingCharactersList, setDisplayingCharactersList] = useState([])
 
@@ -34,13 +31,15 @@ const Content = props => {
     }
 
     useEffect(() => {
-        const usedOptionsAsFilters = getAllOptionsUsedAsFilter(filtersList)
+        const usedOptionsAsFilters = getAllOptionsUsedAsFilter(props.filtersList)
 
-        const charactersListByFilters = getAllCharactersUsedByFilters(charactersList, usedOptionsAsFilters)
+        const charactersListByFilters = getAllCharactersUsedByFilters(props.charactersList, usedOptionsAsFilters)
 
-        setDisplayingCharactersList(getAllCharactersByName(charactersListByFilters, searchByNameField))
+        const charactersListByName = getAllCharactersByName(charactersListByFilters, props.searchByNameField)
 
-    }, [charactersList, filtersList, searchByNameField])
+        setDisplayingCharactersList(getAllCharactersByBirthDate(charactersListByName, props.birthRanges))
+
+    }, [props.charactersList, props.filtersList, props.searchByNameField, props.birthRanges])
 
     useEffect(() => {
         dispatch(fetchAllCharacters())
@@ -51,10 +50,10 @@ const Content = props => {
         <main className={s.wrapper}>
             <Favorites/>
             <section className={s.content_wrapper}>
-                {isDataFetching ? <img src={loader} alt={'loader'}/> : (
+                {props.isDataFetching ? <img src={loader} alt={'loader'}/> : (
                     <>
                         <div className={s.search_input}>
-                            <input placeholder={'SEARCH BY CHARACTER NAME'} value={searchByNameField}
+                            <input placeholder={'SEARCH BY CHARACTER NAME'} value={props.searchByNameField}
                                    onChange={updateSearchNameInput}/>
                         </div>
                         {displayingCharactersList.map(charactersListMapper)}
@@ -66,4 +65,16 @@ const Content = props => {
     )
 }
 
-export default Content
+const mapStateToProps = (store) => {
+    return {
+        isDataFetching: store.charactersState.isFetching,
+        searchByNameField: store.filtersState.searchByNameField,
+        charactersList: store.charactersState.charactersList.map(({name, birth_year, url, species, films, starships, homeworld}) => {
+            return {name, birth_year, url, species, films, starships, homeworld}
+        }),
+        filtersList: store.filtersState.filterEntities,
+        birthRanges: store.filtersState.birthRanges
+    }
+}
+
+export default connect(mapStateToProps)(Content)

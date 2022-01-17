@@ -2,12 +2,15 @@ import React, {Fragment, useEffect, useState} from 'react'
 
 import s from './character-tile.module.css'
 import {StarWarsEntityApi} from "../../api/StarWarsEntityApi";
+import {useDispatch} from "react-redux";
+import {updateCharactersFields} from "../../store/actions/characters-actions";
 
 const CharacterTile = props => {
-    const {name, birth_year, url} = props
+    const {name, birth_year, url, species, films, starships} = props
     const [isDetailsOpen, setIsDetailsOpenStatus] = useState(false)
-    const [details, setDetails] = useState((({species, movies, spaceships}) => ({species, movies, spaceships}))(props))
     const [isDetailsLoading, setIsDetailsLoadingStatus] = useState(false)
+    const dispatch = useDispatch()
+
 
     const requestDataLoop = async (fetchUrls) => {
 
@@ -24,29 +27,34 @@ const CharacterTile = props => {
         event.dataTransfer.setData('url', url)
     }
 
-
-    useEffect(() => {
+    useEffect(function () {
         if (isDetailsOpen) {
-            Object.keys(details).forEach(key => {
-                if (!details[key]) return
+            const details = {species, films, starships}
+            Object.keys(details).forEach(function (key) {
+                if (!details[key]?.length) {
+                    dispatch(updateCharactersFields(url, {[`${key}`]:['unknown']}))
+                    return
+                }
 
-                requestDataLoop(details[key]).then(res => {
+                requestDataLoop(details[key]).then(function (res) {
                     let names = res.map(data => (data.name || data.title))
-
-                    setDetails({...details, [`${key}`]: names})
+                    dispatch(updateCharactersFields(url, {[`${key}`]: names}))
                 })
             })
+
         }
     }, [isDetailsOpen])
 
     return (
-        <div draggable={true} onDragStart={onDragStartHandler} className={s.wrapper} >
+        <div draggable={true} onDragStart={onDragStartHandler} className={s.wrapper}>
             <div onClick={setIsDetailsOpenStatus.bind(null, !isDetailsOpen)} className={s.general_info}>
                 <p>{name}</p>
                 <p>D0B: {birth_year}</p>
             </div>
             <div className={`${isDetailsOpen && s.open} ${s.details_wrapper}`}>
-                {Object.keys(details).map(key => <p>{key} : {details[key] || 'unknown'}</p>)}
+                <p>species: {species.map(spec => <span>{spec}</span>)}</p>
+                <p>films: {films.map(film => <span>{film}</span>)}</p>
+                <p>starships: {starships.map(starship => <span>{starship}</span>)}</p>
             </div>
         </div>
     )

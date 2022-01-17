@@ -1,2 +1,17 @@
 @import '../../misc/global/global.module';
 
+.range_input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+
+  p {
+    font-size: 1.2rem;
+  }
+
+  input {
+    width: 100%;
+  }
+}

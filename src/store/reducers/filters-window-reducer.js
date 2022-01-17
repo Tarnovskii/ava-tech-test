@@ -31,6 +31,14 @@ export default (state = {}, action) => {
                 ...state,
                 searchByNameField: action.value
             }
+        case '[FILTERS] UPDATE_BIRTH_DATE_RANGES':
+            return {
+                ...state,
+                birthRanges: {
+                    ...state.birthRanges,
+                    [`${action.value.border}`]: action.value.value
+                }
+            }
         default:
             return state
     }

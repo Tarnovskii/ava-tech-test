@@ -32,7 +32,8 @@
   height: auto;
 
   p {
-
+    display: flex;
+    column-gap: 1rem;
     flex: 0 1 50%;
   }
 }
