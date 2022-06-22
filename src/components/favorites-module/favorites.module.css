@@ -1,5 +1,5 @@
 .additional_windows {
-  flex: 0 0 20%;
+   flex: 0 0 20%;
   overflow-y: auto;
   overflow-x: hidden;
   transition: 0.3s all;

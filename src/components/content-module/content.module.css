@@ -7,7 +7,9 @@
 }
 
 .content_wrapper {
-  flex: 1 0 auto;
+overflow-y: hidden;
+overflow-x: auto;
+flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
@@ -23,8 +25,6 @@
 
 .search_input {
   width: 100%;
-  position: sticky;
-  top: 12rem;
 }
 .search_input input {
   text-align: center;
